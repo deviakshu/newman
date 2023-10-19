@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "d685f529-1874-434d-b900-8ed0a4650f45",
+		"name": "Newman_P",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30061349"
+	},
+	"item": [
+		{
+			"name": "Child_P1",
+			"item": [
+				{
+					"name": "UserCreation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json()\r",
+									"\r",
+									"pm.test('check response', function(){\r",
+									"    if(pm.response.code==201){\r",
+									"        pm.expect(res.name).to.eql('rani')\r",
+									"    }\r",
+									"    else{\r",
+									"        console.log('staus code is different')\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"{{name}}\",\r\n    \"city\":\"{{city}}\",\r\n    \"address\":{\r\n        \"zip\": \"{{zip}}\"\r\n    },\r\n    \"mobile\": {{mobile}},\r\n    \"age\": {{age}}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/api/users",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Child_P2",
+			"item": [
+				{
+					"name": "ReadUsers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var res = pm.response.json()\r",
+									"\r",
+									"pm.test('check response', function(){\r",
+									"    if(pm.response.code==200){\r",
+									"        pm.expect(res.page).to.eql(2)\r",
+									"    }\r",
+									"    else{\r",
+									"        console.log('staus code is different')\r",
+									"    }\r",
+									"})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/api/users?page=2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
